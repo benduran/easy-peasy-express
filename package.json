@@ -1,0 +1,35 @@
+{
+  "name": "easy-peasy-express",
+  "version": "0.1.0",
+  "description": "Make wiring up routes in express.js less sucky, require less programming, and more configuring! Yay!",
+  "main": "easy-peasy-express.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benduran/easy-peasy-express.git"
+  },
+  "keywords": [
+    "express",
+    "node",
+    "npm",
+    "routing",
+    "config",
+    "get",
+    "post",
+    "put",
+    "delete"
+  ],
+  "author": "Benjamin Duran",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/benduran/easy-peasy-express/issues"
+  },
+  "homepage": "https://github.com/benduran/easy-peasy-express#readme",
+  "devDependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4"
+  }
+}

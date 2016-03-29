@@ -1,0 +1,17 @@
+{
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "rules": {
+        "no-console": 0,
+        "no-unused-vars": 1,
+        "indent": 0,
+        "quotes": [2, "single", "avoid-escape"],
+        "semi": 2
+    }
+}

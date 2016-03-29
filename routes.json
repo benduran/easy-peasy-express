@@ -1,0 +1,14 @@
+{
+    "get/test": {
+        "actionMethod": "test"
+    },
+    "post/deeper/still": {
+        "actionMethod": "testPost"
+    },
+    "put/big/fat/put/:someRandomId": {
+        "actionMethod": "testPutOnSameController"
+    },
+    "delete/user/:group/:userId": {
+        "actionMethod": "superAwesomeDelete"
+    }
+}
