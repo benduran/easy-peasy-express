@@ -1,6 +1,22 @@
 {
     "get/test": {
-        "actionMethod": "test"
+        "actionMethod": "test",
+        "requiresAuth": true
+    },
+    "get/login": {
+        "actionMethod": "loginPage",
+        "isLogin": true,
+        "headers": {
+            "Content-Type": "text/html; charset=utf8",
+            "X-Suck-It-Trebek": "Okay!"
+        }
+    },
+    "get/redirectPlease": {
+        "redirectTo": "/login",
+        "keepOldURL": true,
+        "headers": {
+            "Content-Type": "text/html; charset=utf8"
+        }
     },
     "post/deeper/still": {
         "actionMethod": "testPost"

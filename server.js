@@ -4,8 +4,14 @@ var express = require('express'),
 
 var server = express();
 server.use(require('body-parser').json());
-easyPeasy(server, './routes.json', './controllers');
+easyPeasy(server, './routes.json', './controllers', {
+    serverPort: 8084,
+    verbose: true,
+    authCheckFnc: function (req, res) {
 
-var httpListener = server.listen(80, function () {
+    }
+});
+
+var httpListener = server.listen(8084, function () {
     console.log('Express is now listening for connections on port ' + httpListener.address().port);
 });
