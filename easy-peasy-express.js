@@ -37,6 +37,7 @@ function bindRoutes(server, routesConfig, allControllers, args) {
     additionalArgs = args || {};
     authCheckFnc = additionalArgs.authCheckFnc || function () { return true; };
     authCookieName = additionalArgs.authCookieName || null;
+    additionalArgs.verbose = additionalArgs.verbose || false;
     for(let r in routesConfig)     {
         let fullPath = r;
         let firstSlashIndex = fullPath.indexOf('/');
@@ -73,7 +74,7 @@ function bindRoutes(server, routesConfig, allControllers, args) {
         switch(method.toLowerCase()) {
             case 'post':
                 server.post(url, (req, res) => {
-                    if(config.requiresAuth && (!authCheckFnc(req, res) || (authCookieName && req.cookies && !req.cookies[authCookieName]))) {
+                    if(config.requiresAuth && ((authCookieName && req.cookies && !req.cookies[authCookieName])) || !authCheckFnc(req, res)) {
                         res.status(401).end();
                     }
                     else {
@@ -84,7 +85,7 @@ function bindRoutes(server, routesConfig, allControllers, args) {
                 break;
             case 'put':
                 server.put(url, (req, res) => {
-                    if(config.requiresAuth && (!authCheckFnc(req, res) || (authCookieName && req.cookies && !req.cookies[authCookieName]))) {
+                    if(config.requiresAuth && ((authCookieName && req.cookies && !req.cookies[authCookieName])) || !authCheckFnc(req, res)) {
                         res.status(401).end();
                     }
                     else {
@@ -95,7 +96,7 @@ function bindRoutes(server, routesConfig, allControllers, args) {
                 break;
             case 'delete':
                 server.delete(url, (req, res) => {
-                    if(config.requiresAuth && (!authCheckFnc(req, res) || (authCookieName && req.cookies && !req.cookies[authCookieName]))) {
+                    if(config.requiresAuth && ((authCookieName && req.cookies && !req.cookies[authCookieName])) || !authCheckFnc(req, res)) {
                         res.status(401).end();
                     }
                     else {
@@ -106,7 +107,7 @@ function bindRoutes(server, routesConfig, allControllers, args) {
                 break;
             case 'options':
                 server.options(url, (req, res) => {
-                    if(config.requiresAuth && (!authCheckFnc(req, res) || (authCookieName && req.cookies && !req.cookies[authCookieName]))) {
+                    if(config.requiresAuth && ((authCookieName && req.cookies && !req.cookies[authCookieName])) || !authCheckFnc(req, res)) {
                         res.status(401).end();
                     }
                     else {
