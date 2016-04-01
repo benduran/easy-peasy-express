@@ -47,11 +47,6 @@ Provide the cookie name that is being used to house your authentication cookie. 
 
 Custom ``function`` that accepts Express's **req** and **res** arguments. Use this when you want to specify custom logic to determine if your requests are authenticated for routes that have their **requiresAuth** options set to ``true``. Defaults to ``null``.
 
-###### Example
-``js
-// TODO:
-``
-
 ### Route Config
 As mentioned before, easy-peasy-express tries to remove the programmatic setting / wiring of server routes by abstracting that away so that your routes are all based on a config file.
 
