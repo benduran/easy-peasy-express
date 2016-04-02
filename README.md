@@ -20,11 +20,7 @@ var server = express();
 server.use(require('body-parser').json());
 
 /* Tell easy-peasy-express about your server setup. */
-/*
-** Provide it the Express instance, relative path to your routes.json config,
-** relative path to your controllers folder, 
-** and a JSON object with options.
-*/
+/* Provide it the Express instance, relative path to your routes.json config, relative path to your controllers folder, and a JSON object with options. */
 easyPeasy(server, './routes.json', './controllers', { ...options });
 
 var httpListener = server.listen(8084, function () {
@@ -119,6 +115,9 @@ Behind the scenes, this is using the ``request`` library to perform a ``GET`` re
 **headers**
 
 JSON object with any headers you would like to be set for a given request. Useful for changing from Express's default ``Content-Type``, setting custom headers, etc.
+
+# Issues
+I really want this package to be super simple to use and useful for the majority of all of your routing needs. Please feel free to report any issues via Github issues. If you want to make any improvements, please issue a pull request and I will review your changes ASAP!
 
 
 # License
