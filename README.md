@@ -10,8 +10,9 @@ easy-peasy-express requires two lines of code when you create your Express.js se
 ### The Javascript
 
 ```javascript
+// Obviously, we'll need to require express and easy-peasy-express.
 var express = require('express'),
-easyPeasy = require('./easy-peasy-express');
+easyPeasy = require('easy-peasy-express');
 
 var server = express();
 
@@ -19,7 +20,11 @@ var server = express();
 server.use(require('body-parser').json());
 
 /* Tell easy-peasy-express about your server setup. */
-/* Provide it the Express instance, relative path to your routes.json config, relative path to your controllers folder, and a JSON object with options. */
+/*
+** Provide it the Express instance, relative path to your routes.json config,
+** relative path to your controllers folder, 
+** and a JSON object with options.
+*/
 easyPeasy(server, './routes.json', './controllers', { ...options });
 
 var httpListener = server.listen(8084, function () {
@@ -40,12 +45,12 @@ Required to be set if you set the **redirectTo** and **keepOldURL** to ``true`` 
 
 **authCookieName**
 
-Provide the cookie name that is being used to house your authentication cookie. If this is set, the presence of a cookie that matches this cookie name will assume the user is authenticated.
+Provide the cookie name that is being used to house your authentication cookie. If this is set, the presence of a cookie that matches this cookie name will assume the user is authenticated. **NOTE:** This assumes there will be a ``req.cookies`` property available to read on the Express ``res`` object, which is typically provided via a middleware like ``cookie-parser``.
 
 
 **authCheckFnc**
 
-Custom ``function`` that accepts Express's **req** and **res** arguments. Use this when you want to specify custom logic to determine if your requests are authenticated for routes that have their **requiresAuth** options set to ``true``. Defaults to ``null``.
+Custom ``function`` that accepts Express's **req** and **res** arguments. Use this when you want to specify custom logic to determine if your requests are authenticated for routes that have their **requiresAuth** options set to ``true``. Defaults to ``function () { return true; }``.
 
 ### Route Config
 As mentioned before, easy-peasy-express tries to remove the programmatic setting / wiring of server routes by abstracting that away so that your routes are all based on a config file.
