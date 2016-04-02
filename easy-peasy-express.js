@@ -35,7 +35,6 @@ function findControllerMethod(fncName, allControllers) {
 }
 
 function bindConfig(server,config, url,  loginRoutePath, allControllers){
-  debugger
   if(!config) {
     throw new Error('No config object found for route "' + fullPath + '".');
   }
