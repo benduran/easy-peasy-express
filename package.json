@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "express": "^4.13.4",
+    "lodash": "^4.7.0",
     "request": "^2.69.0"
   }
 }
