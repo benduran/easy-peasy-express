@@ -114,9 +114,7 @@ Your route config file should be in a valid JSON format, though it can be of any
 
 ```
 
-You'll notice that each route is structured in a ``/{url}/{stuff}/{here}: { ...options }`` format. The object's key becomes the URL itself. The URL's first fragment contains the REST Verb that applies to the given URL. This is mandatory. Leaving off the REST Verb will blow up easy-peasy-express and your route definition for a given URL.
-
-The options can come in the form of a single option, or multiple options via array syntax. This would allow you to specify multiple verbs per a given URL route. An options object can consist of the following:
+You'll notice that each route is structured in a ``/{url}/{stuff}/{here}: { ...options }`` format. The object's key becomes the URL itself. The options can come in the form of a single option, or multiple options via array syntax. This would allow you to specify multiple verbs per a given URL route. An options object can consist of the following:
 
 **actionMethod**
 
