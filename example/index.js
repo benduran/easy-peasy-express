@@ -1,13 +1,12 @@
-
 var express = require('express'),
     easyPeasy = require('../easy-peasy-express');
 
-var server = express();
+var server = module.exports = express();
 server.use(require('body-parser').json());
-easyPeasy(server, './routes.json', './controllers', {
+easyPeasy(server, '../example/routes.json', '../example/controllers', {
     serverPort: 8084,
     verbose: true,
-    authCheckFnc: function (req, res) {
+    authCheckFnc: function authCheckFnc(req, res) {
         return false;
     }
 });
