@@ -3,7 +3,7 @@ var express = require('express'),
 
 var server = module.exports = express();
 server.use(require('body-parser').json());
-easyPeasy(server, './routes.json', './controllers', {
+easyPeasy(server, __dirname + '/routes.json', __dirname + '/controllers', {
     serverPort: 8084,
     verbose: true,
     authCheckFnc: function authCheckFnc(req, res) {
