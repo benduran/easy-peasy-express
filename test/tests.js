@@ -85,7 +85,7 @@ describe('redirects', function () {
   });
 
   describe('Redirects & Keeps URL', function () {
-    it('should GET & /redirectPlease does not redirect to /login?returnUrl=%2Ftest', function (done) {
+    it('should GET /redirectPlease & does not set header.location', function (done) {
       request(app).get('/redirectPlease')
         .expect("Login")
         .expect(function (res) {
