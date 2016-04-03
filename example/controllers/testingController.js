@@ -6,3 +6,8 @@ exports.test = function (req, res) {
     });
     res.end();
 };
+
+exports.namespacedGET = function (req, res) {
+    res.send('Congrats, this is a namespaced actionMethod!');
+    res.end();
+};
