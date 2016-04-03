@@ -1,8 +1,8 @@
 # easy-peasy-express
 
-[npm-image]: https://img.shields.io/npm/v/to-the-bottom.svg?style=flat
+[npm-image]: https://img.shields.io/npm/v/easy-peasy-express.svg?style=flat
 [npm-url]: https://www.npmjs.com/package/easy-peasy-express
-[downloads-image]: https://img.shields.io/npm/dm/to-the-bottom.svg?style=flat
+[downloads-image]: https://img.shields.io/npm/dm/easy-peasy-express.svg?style=flat
 [downloads-url]: https://www.npmjs.com/package/easy-peasy-express
 
 [![npm][npm-image]][npm-url]

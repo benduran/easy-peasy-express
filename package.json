@@ -28,10 +28,10 @@
   ],
   "author": "Benjamin Duran <stratodyne@gmail.com>",
   "contributors": [
-      {
-          "name": "Michael Brandenburg",
-          "email": "mcbrande@gmail.com"
-      }
+    {
+      "name": "Michael Brandenburg",
+      "email": "mcbrande@gmail.com"
+    }
   ],
   "license": "MIT",
   "bugs": {
@@ -39,11 +39,17 @@
   },
   "homepage": "https://github.com/benduran/easy-peasy-express",
   "devDependencies": {
-    "body-parser": "^1.15.0"
+    "body-parser": "^1.15.0",
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
+    "supertest": "^1.2.0"
   },
   "dependencies": {
     "express": "^4.13.4",
     "lodash": "^4.7.0",
     "request": "^2.69.0"
+  },
+  "scripts": {
+    "test": "mocha --reporter spec test/"
   }
 }

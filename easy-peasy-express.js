@@ -190,4 +190,5 @@ module.exports = function(server, pathToRouteConfig, pathToControllers, args) {
 		allControllers[pathToController] = theController;
 	});
 	bindRoutes(server, routesConfig, allControllers, args);
+    return server
 };
