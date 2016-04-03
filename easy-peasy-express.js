@@ -2,6 +2,7 @@
 
 var fs = require('fs'),
 	request = require('request'),
+	path = require('path'),
 	_ = require('lodash'),
 	loginRoutePath = null,
 	additionalArgs = null,
@@ -16,8 +17,9 @@ function objToQueryString(obj) {
 	return query;
 }
 
-function fixRequirePath(path) {
-	return '/' + path.replace('../', '').replace('./', '').replace('\\..', '').replace('\\.', '');
+function fixRequirePath(p) {
+	p = path.normalize(p);
+	return path.resolve(p);
 }
 
 function findControllerMethod(fncName, allControllers) {
@@ -180,9 +182,8 @@ module.exports = function(server, pathToRouteConfig, pathToControllers, args) {
 		throw new Error('Sorry, Holmes. You did\'nt tell me about any of your controllers, so how am I supposed to wire these routes up?');
 	}
 	var allControllers = {},
-		routesConfig = require(process.cwd() + pathToRouteConfig);
+		routesConfig = require(pathToRouteConfig);
 
-	pathToControllers = process.cwd() + pathToControllers;
 	var allControllerPaths = fs.readdirSync(pathToControllers);
 	allControllerPaths.forEach((c) => {
 		let pathToController = pathToControllers + '/' + c;
@@ -190,5 +191,5 @@ module.exports = function(server, pathToRouteConfig, pathToControllers, args) {
 		allControllers[pathToController] = theController;
 	});
 	bindRoutes(server, routesConfig, allControllers, args);
-    return server
+    return server;
 };
