@@ -26,7 +26,13 @@
     "put",
     "delete"
   ],
-  "author": "Benjamin Duran",
+  "author": "Benjamin Duran <stratodyne@gmail.com>",
+  "contributors": [
+      {
+          "name": "Michael Brandenburg",
+          "email": "mcbrande@gmail.com"
+      }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/benduran/easy-peasy-express/issues"
