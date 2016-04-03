@@ -1,5 +1,7 @@
 'use strict';
 
+// Set working directory to the test app so require paths are resolved correctly
+process.chdir('../example');
 var request = require('supertest'),
     app = require('../example'),
     chai = require('chai');
