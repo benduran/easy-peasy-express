@@ -1,0 +1,44 @@
+{
+  "/test": {
+    "verb":"get",
+    "actionMethod": "test",
+    "requiresAuth": true
+  },
+  "/login": [{
+    "verb": "get",
+    "actionMethod": "loginPage",
+    "isLogin": true,
+    "headers": {
+      "Content-Type": "text/html; charset=utf8",
+      "X-Suck-It-Trebek": "Okay!"
+    }
+    },{
+      "verb": "post",
+      "actionMethod": "loginPage",
+      "isLogin": true,
+      "headers": {
+        "Content-Type": "text/html; charset=utf8",
+        "X-Suck-It-Trebek": "Okay!"
+      }
+      }],
+      "/redirectPlease": {
+        "verb":"get",
+        "redirectTo": "/login",
+        "keepOldURL": true,
+        "headers": {
+          "Content-Type": "text/html; charset=utf8"
+        }
+      },
+      "/deeper/still": {
+        "verb":"post",
+        "actionMethod": "testPost"
+      },
+      "/big/fat/put/:someRandomId": {
+        "verb":"put",
+        "actionMethod": "testPutOnSameController"
+      },
+      "/user/:group/:userId": {
+        "verb":"delete",
+        "actionMethod": "superAwesomeDelete"
+      }
+    }

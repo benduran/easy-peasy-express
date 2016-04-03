@@ -1,6 +1,6 @@
 
 var express = require('express'),
-    easyPeasy = require('./easy-peasy-express');
+    easyPeasy = require('../easy-peasy-express');
 
 var server = express();
 server.use(require('body-parser').json());
