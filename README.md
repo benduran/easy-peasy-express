@@ -118,7 +118,7 @@ You'll notice that each route is structured in a ``/{url}/{stuff}/{here}: { ...o
 
 **actionMethod**
 
-The function name that this URL route will be bound to. Anytime this URL is requested, this function will be called and provided Express's ``req`` and ``res`` arguments. This function **definitely** needs to exist on one of the controllers in your controllers directory you specified when you initialized ``easy-peasy-express``. **NOTE:** this option does *not* need to be provided if you've set the ``redirectTo`` property.
+The function name that this URL route will be bound to. Anytime this URL is requested, this function will be called and provided Express's ``req`` and ``res`` arguments. This function **definitely** needs to exist on one of the controllers in your controllers directory you specified when you initialized ``easy-peasy-express``. You can be vague and simply specify a function name that exists on one of your controllers, or you can be more specific and name space the action method to a specific controller in the ``{controllerName}.{functionName}`` format. **NOTE:** this option does *not* need to be provided if you've set the ``redirectTo`` property.
 
 **requiresAuth**
 
