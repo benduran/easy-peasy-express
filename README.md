@@ -65,40 +65,58 @@ Your route config file should be in a valid JSON format, though it can be of any
 #### Sample Route Config
 ```javascript
 {
-	"get/test": {
-        "actionMethod": "test",
-        "requiresAuth": true
-    },
-    "get/login": {
-        "actionMethod": "loginPage",
-        "isLogin": true,
-        "headers": {
-            "Content-Type": "text/html; charset=utf8",
-            "X-Suck-It-Trebek": "Okay!"
-        }
-    },
-    "get/redirectPlease": {
-        "redirectTo": "/login",
-        "keepOldURL": true,
-        "headers": {
-            "Content-Type": "text/html; charset=utf8"
-        }
-    },
-    "post/deeper/still": {
-        "actionMethod": "testPost"
-    },
-    "put/big/fat/put/:someRandomId": {
-        "actionMethod": "testPutOnSameController"
-    },
-    "delete/user/:group/:userId": {
-        "actionMethod": "superAwesomeDelete"
-    }
+   "/test":{
+      "verb":"get",
+      "actionMethod":"test",
+      "requiresAuth":true
+   },
+   "/login":[
+      {
+         "verb":"get",
+         "actionMethod":"loginPage",
+         "isLogin":true,
+         "headers":{
+            "Content-Type":"text/html; charset=utf8",
+            "X-Suck-It-Trebek":"Okay!"
+         }
+      },
+      {
+         "verb":"post",
+         "actionMethod":"loginPage",
+         "isLogin":true,
+         "headers":{
+            "Content-Type":"text/html; charset=utf8",
+            "X-Suck-It-Trebek":"Okay!"
+         }
+      }
+   ],
+   "/redirectPlease":{
+      "verb":"get",
+      "redirectTo":"/login",
+      "keepOldURL":true,
+      "headers":{
+         "Content-Type":"text/html; charset=utf8"
+      }
+   },
+   "/deeper/still":{
+      "verb":"post",
+      "actionMethod":"testPost"
+   },
+   "/big/fat/put/:someRandomId":{
+      "verb":"put",
+      "actionMethod":"testPutOnSameController"
+   },
+   "/user/:group/:userId":{
+      "verb":"delete",
+      "actionMethod":"superAwesomeDelete"
+   }
 }
+
 ```
 
-You'll notice that each route is structured in a ``{verb}/{url}/{stuff}/{here}: { ...options }`` format. The object's key becomes the URL itself. The URL's first fragment contains the REST Verb that applies to the given URL. This is mandatory. Leaving off the REST Verb will blow up easy-peasy-express and your route definition for a given URL.
+You'll notice that each route is structured in a ``/{url}/{stuff}/{here}: { ...options }`` format. The object's key becomes the URL itself. The URL's first fragment contains the REST Verb that applies to the given URL. This is mandatory. Leaving off the REST Verb will blow up easy-peasy-express and your route definition for a given URL.
 
-On any given route, you can specify a few options:
+The options can come in the form of a single option, or multiple options via array syntax. This would allow you to specify multiple verbs per a given URL route. An options object can consist of the following:
 
 **actionMethod**
 
