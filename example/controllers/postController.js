@@ -12,7 +12,7 @@ exports.testPutOnSameController = function (req, res) {
     res.json({
         args: req.body || {},
         uriFragments: req.params || {},
-        sucess: 'YES YES!'
+        success: 'YES YES!'
     });
     res.end();
 };

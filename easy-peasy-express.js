@@ -34,7 +34,13 @@ function findControllerMethod(fncName, allControllers) {
 	return null;
 }
 
-function bindConfig(server, config, url, loginRoutePath, allControllers) {
+function checkRequestAuthorized(routeConfig, req, res) {
+	return !routeConfig.requiresAuth ||
+			(authCookieName && req.cookies && req.cookies[authCookieName]) ||
+			authCheckFnc(req, res);
+}
+
+function bindConfig(server, config, url, allControllers) {
 	if (!config) {
 		throw new Error('No config object found for route "' + url + '".');
 	}
@@ -62,7 +68,7 @@ function bindConfig(server, config, url, loginRoutePath, allControllers) {
 	switch (config.verb.toLowerCase()) {
 		case 'post':
 			server.post(url, (req, res) => {
-				if (config.requiresAuth && ((authCookieName && req.cookies && !req.cookies[authCookieName])) || !authCheckFnc(req, res)) {
+				if (!checkRequestAuthorized(config, req, res)) {
 					res.status(401).end();
 				} else {
 					res.set(config.headers || {});
@@ -72,7 +78,7 @@ function bindConfig(server, config, url, loginRoutePath, allControllers) {
 			break;
 		case 'put':
 			server.put(url, (req, res) => {
-				if (config.requiresAuth && ((authCookieName && req.cookies && !req.cookies[authCookieName])) || !authCheckFnc(req, res)) {
+				if (!checkRequestAuthorized(config, req, res)) {
 					res.status(401).end();
 				} else {
 					res.set(config.headers || {});
@@ -82,7 +88,7 @@ function bindConfig(server, config, url, loginRoutePath, allControllers) {
 			break;
 		case 'delete':
 			server.delete(url, (req, res) => {
-				if (config.requiresAuth && ((authCookieName && req.cookies && !req.cookies[authCookieName])) || !authCheckFnc(req, res)) {
+				if (!checkRequestAuthorized(config, req, res)) {
 					res.status(401).end();
 				} else {
 					res.set(config.headers || {});
@@ -92,7 +98,7 @@ function bindConfig(server, config, url, loginRoutePath, allControllers) {
 			break;
 		case 'options':
 			server.options(url, (req, res) => {
-				if (config.requiresAuth && ((authCookieName && req.cookies && !req.cookies[authCookieName])) || !authCheckFnc(req, res)) {
+				if (!checkRequestAuthorized(config, req, res)) {
 					res.status(401).end();
 				} else {
 					res.set(config.headers || {});
@@ -122,7 +128,7 @@ function bindConfig(server, config, url, loginRoutePath, allControllers) {
 					} else {
 						res.redirect(config.redirectTo + objToQueryString(req.query));
 					}
-				} else if (config.requiresAuth && (!authCheckFnc(req, res) || (authCookieName && req.cookies && !req.cookies[authCookieName]))) {
+				} else if (!checkRequestAuthorized(config, req, res)) {
 					// The user-provided authCheckFnc returns false, or the authCookie doesn't exist (if cookieParser() middleware is being used)
 					if (loginRoutePath) {
 						res.redirect(loginRoutePath + objToQueryString(req.query) + 'returnUrl=' + encodeURIComponent(req.url));
@@ -150,19 +156,20 @@ function bindRoutes(server, routesConfig, allControllers, args) {
 		let url = r;
 		let config = routesConfig[r];
 		if (_.isArray(config)) {
-			for (let c of config) {
-				if (config.isLogin && !loginRoutePath) {
+			for(let i = 0; i < config.length; i++) {
+				let localConfig = config[i];
+				if (localConfig.isLogin && !loginRoutePath) {
 					// You can only have one login route per app. Does it make sense to have more than one? I don't think
 					loginRoutePath = url;
 				}
-				bindConfig(server, c, url, loginRoutePath, allControllers);
+				bindConfig(server, localConfig, url, allControllers);
 			}
 		} else {
 			if (config.isLogin && !loginRoutePath) {
 				// You can only have one login route per app. Does it make sense to have more than one? I don't think
 				loginRoutePath = url;
 			}
-			bindConfig(server, config, url, loginRoutePath, allControllers);
+			bindConfig(server, config, url, allControllers);
 		}
 
 	}

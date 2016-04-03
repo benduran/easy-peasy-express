@@ -8,7 +8,7 @@ easyPeasy(server, './routes.json', './controllers', {
     serverPort: 8084,
     verbose: true,
     authCheckFnc: function (req, res) {
-
+        return false;
     }
 });
 
