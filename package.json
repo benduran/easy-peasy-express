@@ -1,6 +1,6 @@
 {
   "name": "easy-peasy-express",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Make wiring up routes in express.js less sucky, require less programming, and more configuring! Yay!",
   "main": "easy-peasy-express.js",
   "repository": {
@@ -50,6 +50,6 @@
     "request": "^2.69.0"
   },
   "scripts": {
-    "test": "mocha --reporter spec test/"
+    "test": "node node_modules/mocha/bin/mocha --reporter spec test/"
   }
 }
