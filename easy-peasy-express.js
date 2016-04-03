@@ -21,12 +21,24 @@ function fixRequirePath(path) {
 }
 
 function findControllerMethod(fncName, allControllers) {
+	fncName = fncName || '';
+	var controllerName = null,
+		requiresControllerName = false;
+	if(fncName.indexOf('.') > -1) {
+		let sFncName = fncName.split('.');
+		controllerName = sFncName[0];
+		fncName = sFncName.length > 1 ? sFncName[1] : null;
+		requiresControllerName = true;
+	}
+	controllerName = controllerName ? new RegExp(controllerName + '\.[a-zA-Z][a-zA-Z0-9]+$', 'i') : null;
 	if (fncName) {
 		for (let cPath in allControllers) {
 			let c = allControllers[cPath];
-			for (let cFnc in c) {
-				if (cFnc.toLowerCase() == fncName.toLowerCase()) {
-					return c[cFnc];
+			if(!requiresControllerName || (controllerName && controllerName.test(cPath))) {
+				for (let cFnc in c) {
+					if (cFnc.toLowerCase() == fncName.toLowerCase()) {
+						return c[cFnc];
+					}
 				}
 			}
 		}
@@ -38,6 +50,15 @@ function checkRequestAuthorized(routeConfig, req, res) {
 	return !routeConfig.requiresAuth ||
 			(authCookieName && req.cookies && req.cookies[authCookieName]) ||
 			authCheckFnc(req, res);
+}
+
+function processRequest(req, res, config, controllerMethod) {
+	if (!checkRequestAuthorized(config, req, res)) {
+		res.status(401).end();
+	} else {
+		res.set(config.headers || {});
+		controllerMethod(req, res);
+	}
 }
 
 function bindConfig(server, config, url, allControllers) {
@@ -67,43 +88,23 @@ function bindConfig(server, config, url, allControllers) {
 
 	switch (config.verb.toLowerCase()) {
 		case 'post':
-			server.post(url, (req, res) => {
-				if (!checkRequestAuthorized(config, req, res)) {
-					res.status(401).end();
-				} else {
-					res.set(config.headers || {});
-					controllerMethod(req, res);
-				}
+			server.post(url, function (req, res) {
+				processRequest(req, res, config, controllerMethod);
 			});
 			break;
 		case 'put':
-			server.put(url, (req, res) => {
-				if (!checkRequestAuthorized(config, req, res)) {
-					res.status(401).end();
-				} else {
-					res.set(config.headers || {});
-					controllerMethod(req, res);
-				}
+			server.put(url, function (req, res) {
+				processRequest(req, res, config, controllerMethod);
 			});
 			break;
 		case 'delete':
-			server.delete(url, (req, res) => {
-				if (!checkRequestAuthorized(config, req, res)) {
-					res.status(401).end();
-				} else {
-					res.set(config.headers || {});
-					controllerMethod(req, res);
-				}
+			server.delete(url, function (req, res) {
+				processRequest(req, res, config, controllerMethod);
 			});
 			break;
 		case 'options':
-			server.options(url, (req, res) => {
-				if (!checkRequestAuthorized(config, req, res)) {
-					res.status(401).end();
-				} else {
-					res.set(config.headers || {});
-					controllerMethod(req, res);
-				}
+			server.options(url, function (req, res) {
+				processRequest(req, res, config, controllerMethod);
 			});
 			break;
 		case 'get':
@@ -152,26 +153,16 @@ function bindRoutes(server, routesConfig, allControllers, args) {
 	};
 	authCookieName = additionalArgs.authCookieName || null;
 	additionalArgs.verbose = additionalArgs.verbose || false;
-	for (let r in routesConfig) {
-		let url = r;
-		let config = routesConfig[r];
-		if (_.isArray(config)) {
-			for(let i = 0; i < config.length; i++) {
-				let localConfig = config[i];
-				if (localConfig.isLogin && !loginRoutePath) {
-					// You can only have one login route per app. Does it make sense to have more than one? I don't think
-					loginRoutePath = url;
-				}
-				bindConfig(server, localConfig, url, allControllers);
-			}
-		} else {
-			if (config.isLogin && !loginRoutePath) {
+	for (var url in routesConfig) {
+		let config = routesConfig[url];
+		config = _.isArray(config) ? config : [config]; // lol Javascript
+		config.forEach((localConfig) => {
+			if (localConfig.isLogin && !loginRoutePath) {
 				// You can only have one login route per app. Does it make sense to have more than one? I don't think
 				loginRoutePath = url;
 			}
-			bindConfig(server, config, url, allControllers);
-		}
-
+			bindConfig(server, localConfig, url, allControllers);
+		});
 	}
 }
 

@@ -43,5 +43,9 @@
    "/user/:group/:userId":{
       "verb":"delete",
       "actionMethod":"superAwesomeDelete"
-   }
+  },
+  "/namespaced/action/method": {
+      "verb": "get",
+      "actionMethod": "testingController.namespacedGET"
+  }
 }
