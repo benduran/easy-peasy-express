@@ -49,9 +49,14 @@ function findControllerMethod(fncName, allControllers) {
 }
 
 function checkRequestAuthorized(routeConfig, req, res) {
-	return !routeConfig.requiresAuth ||
-			(authCookieName && req.cookies && req.cookies[authCookieName]) ||
-			authCheckFnc(req, res);
+	// If an authCookie name was provided, only use that as the method for authCookie
+	if(routeConfig.requiresAuth) {
+		if(authCookieName) {
+			return req.cookies && req.cookies[authCookieName];
+		}
+		return authCheckFnc(req, res);
+	}
+	return true;
 }
 
 function processRequest(req, res, config, controllerMethod) {
