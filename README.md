@@ -11,7 +11,7 @@
 A super simple way to configure URL routes in your express app. It's all about dat config, yo!
 
 # Install
-npm install easy-peasy-express --save
+``npm install easy-peasy-express --save``
 
 # Usage
 easy-peasy-express requires two lines of code when you create your Express.js server instance. Everything else is 100% config-driven.
