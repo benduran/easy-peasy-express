@@ -117,7 +117,13 @@ function bindConfig(server, config, url, allControllers) {
 		case 'get':
 		default:
 			server.get(url, (req, res) => {
-				if (config.redirectTo) {
+				if(!checkRequestAuthorized(config, req, res)) {
+					if (loginRoutePath) {
+						res.redirect(loginRoutePath + objToQueryString(req.query) + 'returnUrl=' + encodeURIComponent(req.url));
+					} else {
+						res.status(401).end();
+					}
+				} else if (config.redirectTo) {
 					if (config.keepOldURL) {
 						// Will request the page manually here via request library
 						// and pipe it through as if it were coming from this request instance
@@ -135,13 +141,6 @@ function bindConfig(server, config, url, allControllers) {
 						});
 					} else {
 						res.redirect(config.redirectTo + objToQueryString(req.query));
-					}
-				} else if (!checkRequestAuthorized(config, req, res)) {
-					// The user-provided authCheckFnc returns false, or the authCookie doesn't exist (if cookieParser() middleware is being used)
-					if (loginRoutePath) {
-						res.redirect(loginRoutePath + objToQueryString(req.query) + 'returnUrl=' + encodeURIComponent(req.url));
-					} else {
-						res.status(401).end();
 					}
 				} else {
 					res.set(config.headers || {});
