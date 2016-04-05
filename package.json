@@ -1,55 +1,53 @@
 {
-  "name": "easy-peasy-express",
-  "version": "0.1.7",
-  "description": "Make wiring up routes in express.js less sucky, require less programming, and more configuring! Yay!",
-  "main": "easy-peasy-express.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/benduran/easy-peasy-express.git"
-  },
-  "keywords": [
-    "easy",
-    "peasy",
-    "easy-peasy",
-    "easy-peasy-express",
-    "express",
-    "node",
-    "npm",
-    "routing",
-    "express-route",
-    "express-routing",
-    "express-router",
-    "route.config",
-    "config",
-    "get",
-    "post",
-    "put",
-    "delete"
-  ],
-  "author": "Benjamin Duran <stratodyne@gmail.com>",
-  "contributors": [
-    {
-      "name": "Michael Brandenburg",
-      "email": "mcbrande@gmail.com"
+    "name": "easy-peasy-express",
+    "version": "0.1.8",
+    "description": "Make wiring up routes in express.js less sucky, require less programming, and more configuring! Yay!",
+    "main": "easy-peasy-express.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/benduran/easy-peasy-express.git"
+    },
+    "keywords": [
+        "easy",
+        "peasy",
+        "easy-peasy",
+        "easy-peasy-express",
+        "express",
+        "node",
+        "npm",
+        "routing",
+        "express-route",
+        "express-routing",
+        "express-router",
+        "route.config",
+        "config",
+        "get",
+        "post",
+        "put",
+        "delete"
+    ],
+    "author": "Benjamin Duran <stratodyne@gmail.com>",
+    "contributors": [{
+        "name": "Michael Brandenburg",
+        "email": "mcbrande@gmail.com"
+    }],
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/benduran/easy-peasy-express/issues"
+    },
+    "homepage": "https://github.com/benduran/easy-peasy-express",
+    "devDependencies": {
+        "body-parser": "^1.15.0",
+        "chai": "^3.5.0",
+        "mocha": "^2.4.5",
+        "supertest": "^1.2.0"
+    },
+    "dependencies": {
+        "express": "^4.13.4",
+        "lodash": "^4.7.0",
+        "request": "^2.69.0"
+    },
+    "scripts": {
+        "test": "node node_modules/mocha/bin/mocha --reporter spec test/"
     }
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/benduran/easy-peasy-express/issues"
-  },
-  "homepage": "https://github.com/benduran/easy-peasy-express",
-  "devDependencies": {
-    "body-parser": "^1.15.0",
-    "chai": "^3.5.0",
-    "mocha": "^2.4.5",
-    "supertest": "^1.2.0"
-  },
-  "dependencies": {
-    "express": "^4.13.4",
-    "lodash": "^4.7.0",
-    "request": "^2.69.0"
-  },
-  "scripts": {
-    "test": "node node_modules/mocha/bin/mocha --reporter spec test/"
-  }
 }
