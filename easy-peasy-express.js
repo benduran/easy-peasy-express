@@ -185,8 +185,9 @@ module.exports = function(server, pathToRouteConfig, pathToControllers, args) {
 	if (!pathToControllers) {
 		throw new Error('Sorry, Holmes. You did\'nt tell me about any of your controllers, so how am I supposed to wire these routes up?');
 	}
+	// Swapped the require on the JSON routes config to just reading the file and parsing it because requiring it was causing it to miss properties!
 	var allControllers = {},
-		routesConfig = require(pathToRouteConfig);
+		routesConfig = JSON.parse(fs.readFileSync(pathToRouteConfig, 'utf8'));
 
 	var allControllerPaths = fs.readdirSync(pathToControllers);
 	allControllerPaths.forEach((c) => {
