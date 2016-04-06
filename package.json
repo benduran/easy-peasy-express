@@ -1,6 +1,6 @@
 {
     "name": "easy-peasy-express",
-    "version": "0.1.10",
+    "version": "0.1.9",
     "description": "Make wiring up routes in express.js less sucky, require less programming, and more configuring! Yay!",
     "main": "easy-peasy-express.js",
     "repository": {
