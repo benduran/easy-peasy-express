@@ -121,7 +121,11 @@ function bindConfig(server, config, url, allControllers) {
 							method: 'GET',
 							headers: req.headers
 						}, (err, response) => {
-							res.set(config.headers || {});
+							res.set(_.assign(config.headers || {}, {
+								'Cache-Control': 'no-cache, no-store, must-revalidate',
+								'Pragma': 'no-cache',
+								'Expires': 0
+							}));
 							if (err) {
 								res.send(err);
 							} else {
