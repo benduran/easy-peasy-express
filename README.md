@@ -57,6 +57,10 @@ Provide the cookie name that is being used to house your authentication cookie. 
 
 Custom ``function`` that accepts Express's **req** and **res** arguments. Use this when you want to specify custom logic to determine if your requests are authenticated for routes that have their **requiresAuth** options set to ``true``. Defaults to ``function () { return true; }``.
 
+**logFnc**
+
+If you'd like to log any messages to a custom location / logging implementation that are resulting from settings the ``verbose`` flag to ``true``, provide a function here. Function will take a single argument, which is the message trying to be logged. Defaults to ``function (msg) { console.log(msg); }``
+
 ### Route Config
 As mentioned before, easy-peasy-express tries to remove the programmatic setting / wiring of server routes by abstracting that away so that your routes are all based on a config file.
 
