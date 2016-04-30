@@ -1,17 +1,21 @@
 {
+    "extends": "google",
     "env": {
-        "es6": true,
-        "node": true
-    },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "sourceType": "module"
+        "node": true,
+        "commonjs": true,
+        "es6": true
     },
     "rules": {
-        "no-console": 0,
+        "linebreak-style": 0,
+        "indent": ["error", 4],
+        "no-trailing-spaces": 0,
+        "one-var": 0,
         "no-unused-vars": 1,
-        "indent": 0,
-        "quotes": [2, "single", "avoid-escape"],
-        "semi": 2
+        "max-len": ["error", { "code": 150 }],
+        "space-before-function-paren": ["error", {"anonymous": "always", "named": "never"}],
+        "require-jsdoc": 0,
+        "no-negated-condition": 0,
+        "max-len": ["warn", 150],
+        "arrow-parens": 0
     }
 }

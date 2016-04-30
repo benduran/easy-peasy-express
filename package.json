@@ -1,6 +1,6 @@
 {
   "name": "easy-peasy-express",
-  "version": "0.1.7",
+  "version": "0.2.0",
   "description": "Make wiring up routes in express.js less sucky, require less programming, and more configuring! Yay!",
   "main": "easy-peasy-express.js",
   "repository": {
@@ -41,6 +41,8 @@
   "devDependencies": {
     "body-parser": "^1.15.0",
     "chai": "^3.5.0",
+    "eslint": "^2.9.0",
+    "eslint-config-google": "^0.5.0",
     "mocha": "^2.4.5",
     "supertest": "^1.2.0"
   },
