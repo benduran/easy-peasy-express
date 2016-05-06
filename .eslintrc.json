@@ -16,6 +16,7 @@
         "require-jsdoc": 0,
         "no-negated-condition": 0,
         "max-len": ["warn", 150],
-        "arrow-parens": 0
+        "arrow-parens": 0,
+        "brace-style": ["error", "1tbs"]
     }
 }

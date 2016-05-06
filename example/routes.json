@@ -47,5 +47,10 @@
   "/namespaced/action/method": {
       "verb": "get",
       "actionMethod": "testingController.namespacedGET"
+  },
+  "/assets": {
+      "staticFiles": true,
+      "allowedExt": [".html", ".js", ".css"],
+      "staticDir": "/src"
   }
 }
