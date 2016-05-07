@@ -20,22 +20,19 @@ easy-peasy-express requires two lines of code when you create your Express.js se
 
 ```javascript
 // Obviously, we'll need to require express and easy-peasy-express.
-var express = require('express'),
-easyPeasy = require('easy-peasy-express');
+'use strict';
 
-var server = express();
+const path = require('path');
+const express = require('express'),
+      easyPeasy = require('easy-peasy-express');
 
-/* Include your middleware, as desired. */
+const server = express();
 server.use(require('body-parser').json());
-
-/* Tell easy-peasy-express about your server setup. */
-/* Provide it the Express instance, relative path to your routes.json config, relative path to your controllers folder, and a JSON object with options. */
 easyPeasy(server, './routes.json', './controllers', { ...options });
 
-var httpListener = server.listen(8084, function () {
+const httpListener = server.listen(8084, function () {
     console.log('Express is now listening for connections on port ' + httpListener.address().port);
 });
-
 ```
 
 ### Options
@@ -69,6 +66,11 @@ Your route config file should be in a valid JSON format, though it can be of any
 #### Sample Route Config
 ```javascript
 {
+    "/assets": {
+        "staticFiles": true,
+        "allowedExt": [".html", ".js", ".css"],
+        "staticDir": "/src"
+    },
    "/test":{
       "verb":"get",
       "actionMethod":"test",
@@ -144,6 +146,20 @@ Behind the scenes, this is using the ``request`` library to perform a ``GET`` re
 **headers**
 
 JSON object with any headers you would like to be set for a given request. Useful for changing from Express's default ``Content-Type``, setting custom headers, etc.
+
+**staticFiles**
+
+Settings this property to ``true`` will setup your route key to have all files underneath it be served up as static files. Use this in conjunction with ``allowedExt`` and ``staticDir`` to properly configure serving of static files. Defaults to ``undefined``.
+
+**allowedExt**
+
+An ``array`` of file extensions that are allowed to be served by this route (see sample config above for an example of extension). Use this when setting ``staticFiles`` to ``true``. Defaults to ``undefined``.
+
+**staticDir**
+
+A relative directory where your static files exist in your project. Only files that match one of the entries in the ``allowedExt`` array will be served. Defaults to ``undefined``.
+
+
 
 # Issues
 I really want this package to be super simple to use and useful for the majority of all of your routing needs. Please feel free to report any issues via Github issues. If you want to make any improvements, please issue a pull request and I will review your changes ASAP!

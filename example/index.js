@@ -9,7 +9,7 @@ const
 const
     easyPeasy = require('../easy-peasy-express');
 
-var server = module.exports = express();
+const server = module.exports = express();
 server.use(require('body-parser').json());
 easyPeasy(server, path.join(__dirname, '/routes.json'), path.join(__dirname, '/controllers'), {
     serverPort: 8084,
