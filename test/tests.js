@@ -98,8 +98,8 @@ describe('redirects', function () {
   });
 });
 
-describe('POST Redirects', function () {
-  describe('Redirects', function () {
+describe('Non-GET Redirects', function () {
+  describe('POST Redirects', function () {
     it('should POST /post/redirectto & redirects to /post/redirectionpost', function (done) {
       request(app).post('/post/redirectto')
       .expect(function (res) {
@@ -107,14 +107,14 @@ describe('POST Redirects', function () {
       })
       .expect(307, done);
     });
-  });
-  describe('Redirects', function () {
     it('shouldn\'t GET /post/redirectto', function (done) {
       request(app).get('/post/redirectto')
       .expect(404, done);
     });
-  });
-  describe('Redirects', function () {
+    it('shouldn\'t PUT /post/redirectto', function (done) {
+      request(app).put('/post/redirectto')
+      .expect(404, done);
+    });
     it('should POST /post/redirectionpost', function (done) {
       request(app).post('/post/redirectionpost')
       .expect(function (res) {
@@ -122,10 +122,42 @@ describe('POST Redirects', function () {
       })
       .expect(200, done);
     });
-  });
-  describe('Redirects', function () {
     it('should not GET /post/redirectionpost', function (done) {
       request(app).get('/post/redirectionpost')
+      .expect(404, done);
+    });
+    it('should not PUT /post/redirectionpost', function (done) {
+      request(app).put('/post/redirectionpost')
+      .expect(404, done);
+    });
+  });
+
+  describe('PUT Redirects', function () {
+    it('should PUT /put/into/redirectPut & redirects to /going/to/put', function (done) {
+      request(app).put('/put/into/redirectPut')
+      .expect(function (res) {
+        chai.expect(_.trimEnd(res.headers.location, '?')).to.be.equal('/going/to/put');
+      })
+      .expect(307, done);
+    });
+    it('shouldn\'t POST /put/into/redirectPut', function (done) {
+      request(app).post('/put/into/redirectPut')
+      .expect(404, done);
+    });
+    it('shouldn\'t GET /put/into/redirectPut', function (done) {
+      request(app).get('/put/into/redirectPut')
+      .expect(404, done);
+    });
+    it('should PUT /going/to/put', function (done) {
+      request(app).put('/going/to/put')
+      .expect(200, done);
+    });
+    it('should not GET /going/to/put', function (done) {
+      request(app).get('/going/to/put')
+      .expect(404, done);
+    });
+    it('should not POST /going/to/put', function (done) {
+      request(app).post('/going/to/put')
       .expect(404, done);
     });
   });
