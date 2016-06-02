@@ -2,6 +2,7 @@
 
 // Set working directory to the test app so require paths are resolved correctly
 var request = require('supertest'),
+    _ = require('lodash'),
     app = require('../example'),
     chai = require('chai');
 
@@ -93,6 +94,39 @@ describe('redirects', function () {
           chai.expect(res.headers.location).to.be.undefined;
         })
         .expect(200, done);
+    });
+  });
+});
+
+describe('POST Redirects', function () {
+  describe('Redirects', function () {
+    it('should POST /post/redirectto & redirects to /post/redirectionpost', function (done) {
+      request(app).post('/post/redirectto')
+      .expect(function (res) {
+        chai.expect(_.trimEnd(res.headers.location, '?')).to.be.equal('/post/redirectionpost');
+      })
+      .expect(307, done);
+    });
+  });
+  describe('Redirects', function () {
+    it('shouldn\'t GET /post/redirectto', function (done) {
+      request(app).get('/post/redirectto')
+      .expect(404, done);
+    });
+  });
+  describe('Redirects', function () {
+    it('should POST /post/redirectionpost', function (done) {
+      request(app).post('/post/redirectionpost')
+      .expect(function (res) {
+        chai.expect(res.body.postRedirect).to.be.equal('success!');
+      })
+      .expect(200, done);
+    });
+  });
+  describe('Redirects', function () {
+    it('should not GET /post/redirectionpost', function (done) {
+      request(app).get('/post/redirectionpost')
+      .expect(404, done);
     });
   });
 });
