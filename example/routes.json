@@ -52,5 +52,23 @@
       "staticFiles": true,
       "allowedExt": [".html", ".js", ".css"],
       "staticDir": "/src"
+  },
+  "/post/redirectto": {
+      "actionMethod": "somewhereElsePost",
+      "redirectTo": "/post/redirectionpost",
+      "verb": "post"
+  },
+  "/post/redirectionpost": {
+      "actionMethod": "redirectionController.redirectionPost",
+      "verb": "post"
+  },
+  "/put/into/redirectPut": {
+      "actionMethod": "redirectionController.somewhereElsePut",
+      "verb": "put",
+      "redirectTo": "/going/to/put"
+  },
+  "/going/to/put": {
+      "actionMethod": "redirectionController.redirectPut",
+      "verb": "put"
   }
 }

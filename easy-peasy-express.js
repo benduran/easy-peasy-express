@@ -160,22 +160,38 @@ function bindConfig(server, config, url, allControllers) {
         switch (config.verb.toLowerCase()) {
         case 'post':
             server.post(url, function (req, res) {
-                processRequest(req, res, config, controllerMethod);
+                if (config.redirectTo) {
+                    res.redirect(307, config.redirectTo + objToQueryString(req.query));
+                } else {
+                    processRequest(req, res, config, controllerMethod);
+                }
             });
             break;
         case 'put':
             server.put(url, function (req, res) {
-                processRequest(req, res, config, controllerMethod);
+                if (config.redirectTo) {
+                    res.redirect(307, config.redirectTo + objToQueryString(req.query));
+                } else {
+                    processRequest(req, res, config, controllerMethod);
+                }
             });
             break;
         case 'delete':
             server.delete(url, function (req, res) {
-                processRequest(req, res, config, controllerMethod);
+                if (config.redirectTo) {
+                    res.redirect(307, config.redirectTo + objToQueryString(req.query));
+                } else {
+                    processRequest(req, res, config, controllerMethod);
+                }
             });
             break;
         case 'options':
             server.options(url, function (req, res) {
-                processRequest(req, res, config, controllerMethod);
+                if (config.redirectTo) {
+                    res.redirect(307, config.redirectTo + objToQueryString(req.query));
+                } else {
+                    processRequest(req, res, config, controllerMethod);
+                }
             });
             break;
         case 'get':
