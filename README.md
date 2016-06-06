@@ -141,7 +141,7 @@ When set, will cause the current URL route to be redirected to the URL specified
 **keepOldURL**
 
 This is typically used in-conjunction with the ``redirectTo`` property. Very useful for a common single-page-application architecture where multiple URL routes need to redirect to the same View / Page.
-Behind the scenes, this is using the ``request`` library to perform a ``GET`` request on the ``redirectTo`` property, with all of the original request's headers intact. **NOTE:** Only ``GET`` requests are supported at the moment.
+Behind the scenes, this is using the ``request`` library to perform a ``GET`` request on the ``redirectTo`` property, with all of the original request's headers intact. **NOTE:** Only ``GET`` requests are supported with this option.
 
 **headers**
 
