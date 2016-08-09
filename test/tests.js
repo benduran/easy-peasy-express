@@ -1,7 +1,8 @@
 'use strict';
 
 // Set working directory to the test app so require paths are resolved correctly
-var request = require('supertest'),
+const
+    request = require('supertest'),
     _ = require('lodash'),
     app = require('../example'),
     chai = require('chai');

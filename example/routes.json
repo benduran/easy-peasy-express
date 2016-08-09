@@ -2,7 +2,7 @@
    "/test":{
       "verb":"get",
       "actionMethod":"test",
-      "requiresAuth":true
+      "requiresAuth":false
    },
    "/login":[
       {
