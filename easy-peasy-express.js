@@ -279,7 +279,7 @@ module.exports = function (server, pathToRouteConfig, pathToControllers, args) {
     allControllerPaths.forEach((c) => {
         let pathToController = pathToControllers + '/' + c;
         let theController = require(pathToControllers + '/' + c);
-        allControllers[pathToController] = theController;
+        allControllers[pathToController] = theController.default || theController;
     });
     bindRoutes(server, routesConfig, allControllers, args);
     return server;
