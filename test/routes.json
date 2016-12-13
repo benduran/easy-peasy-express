@@ -1,0 +1,10 @@
+{
+    "/testing": {
+        "method": "GET",
+        "action": "testingAction"
+    },
+    "/user": [{
+        "method": "POST",
+        "action": "somethingUser"
+    }]
+}
