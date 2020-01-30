@@ -41,7 +41,7 @@
   "devDependencies": {
     "body-parser": "^1.15.0",
     "chai": "^3.5.0",
-    "eslint": "^2.9.0",
+    "eslint": "^6.8.0",
     "eslint-config-google": "^0.5.0",
     "mocha": "^2.4.5",
     "supertest": "^1.2.0"
