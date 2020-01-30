@@ -1,3 +1,5 @@
+# `easy-peasy-express` is no longer maintained, as many excellent routing alternatives have been released since it was originall created
+
 # easy-peasy-express
 
 [npm-image]: https://img.shields.io/npm/v/easy-peasy-express.svg?style=flat
