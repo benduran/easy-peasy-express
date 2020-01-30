@@ -1,4 +1,4 @@
-# `easy-peasy-express` is no longer maintained, as many excellent routing alternatives have been released since it was originall created
+# `easy-peasy-express` is no longer maintained, as many excellent routing alternatives have been released since it was originally created
 
 # easy-peasy-express
 
